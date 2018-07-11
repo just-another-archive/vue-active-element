@@ -1,6 +1,6 @@
 {
   "name": "vue-active-element",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "vuejs directive to know if element is active (has clicked focus)",
   "main": "./dist/vue-active-element.min.js",
   "global": "VActiveElement",
