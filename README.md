@@ -13,9 +13,9 @@ The directive uses `argument` to get the reactive property to update from the vn
 
 From here, you can load a plugin version, or use the directive independently.
 
-- Plugin: 
+- Plugin:
     ```
-    import ActiveElement from 'vue-fragments'
+    import ActiveElement from 'vue-active-element'
     Vue.use(ActiveElement.Plugin)
 
     …
