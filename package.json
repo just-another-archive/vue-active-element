@@ -1,12 +1,14 @@
 {
   "name": "vue-active-element",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "vuejs directive to know if element is active (has clicked focus)",
-  "main": "./dist/vue-active-element.min.js",
-  "global": "VActiveElement",
+  "main": "dist/vue-active-element.min.js",
+  "module": "dist/vue-active-element.esm.js",
+  "global": "ActiveElement",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./rollup.build.js"
+    "build": "node ./rollup.build.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,11 +29,15 @@
     "vue": "^2.5.16"
   },
   "files": [
-    "*.md", "**/*.js"
+    "*.md",
+    "**/*.js"
   ],
   "homepage": "https://github.com/y-nk/vue-active-element#readme",
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "rollup": "^0.60.4",
+    "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-minify-es": "^1.1.1"
   }
 }
