@@ -1,19 +1,29 @@
 export default {
-  bind(root, { arg }, vnode) {
-    const property = arg ? arg : 'active';
+  bind(root, { expression }, vnode) {
+    const property = expression ? expression : 'active';
 
     root._aehdlr_ = {
       click : e => {
+        const state = e.target === root || root.contains(e.target)
+
         if (property in vnode.context)
-          vnode.context[property] = e.target === root || root.contains(e.target)
+          return typeof vnode.context[property] === 'function'
+            ? vnode.context[property](state)
+            : vnode.context[property] = state
       },
       focusin : e => {
         if (property in vnode.context)
-          vnode.context[property] = true
+          return typeof vnode.context[property] === 'function'
+            ? vnode.context[property](true)
+            : vnode.context[property] = true
       },
       focusout: e => {
-        if (property in vnode.context && vnode.context[property])
-          vnode.context[property] = e.target === root || root.contains(e.target)
+        const state = e.target === root || root.contains(e.target)
+
+        if (property in vnode.context)
+          return typeof vnode.context[property] === 'function'
+            ? vnode.context[property](state)
+            : vnode.context[property] = state
       },
     }
 

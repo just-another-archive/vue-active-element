@@ -23,7 +23,7 @@ From here, you can load a plugin version, or use the directive independently.
     export const MyComponent {
       template: '
       <div class="component">
-        <div class="nested-child" v-active-element:property></div>
+        <div class="nested-child" v-active-element="property"></div>
       </v-fragment>
       ',
       data() { return { property: undefined }}
@@ -38,7 +38,7 @@ From here, you can load a plugin version, or use the directive independently.
       directives: { isclick: AE.directive },
       template: '
       <div class="component">
-        <div class="nested-child" v-isclick:property></div>
+        <div class="nested-child" v-isclick="property"></div>
       </v-fragment>
       ',
       data() { return { property: undefined }}
