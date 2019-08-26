@@ -1,8 +1,8 @@
 export default {
   bind(root, { modifiers, expression = 'active', value }, { context }) {
-    const set = state => {
-      const property = value in context ? value : expression
+    const property = value in context ? value : expression
 
+    const set = state => {
       if (property in context)
         return context[property] instanceof Function
           ? context[property](state)
@@ -13,7 +13,14 @@ export default {
 
     // _ Active Element HaNDLeR
     root._aehdlr_ = {
-      click   : e => set(e.target === root || root.contains(e.target)),
+      click: e => {
+        const value = (e.target === root || root.contains(e.target))
+
+        if (modifiers.toggle && context[property] && value)
+          return set(false)
+
+        return set(value)
+      },
       focusin : () => set(true),
       focusout: () => set(false),
     }
@@ -28,6 +35,7 @@ export default {
     }
 
     document.addEventListener('click', root._aehdlr_.click)
+    document.addEventListener('touchstart', root._aehdlr_.click)
   },
 
   unbind(root) {
@@ -37,8 +45,10 @@ export default {
     if (root._aehdlr_ && root._aehdlr_.focusout)
       root.removeEventListener('focusout', root._aehdlr_.focusout)
 
-    if (root._aehdlr_ && root._aehdlr_.click)
+    if (root._aehdlr_ && root._aehdlr_.click) {
       document.removeEventListener('click', root._aehdlr_.click)
+      document.removeEventListener('touchstart', root._aehdlr_.click)
+    }
 
     if (root._aehdlr_)
       delete root._aehdlr_
